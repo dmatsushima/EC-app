@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <base href="/EC-app/Public/">
+    <title>Document</title>
+</head>
+<body>
+
+<form method="post" action="/login">
+  <h2>ログイン</h2>
+  <input type="email" name="email" placeholder="メールアドレス" required><br>
+  <input type="password" name="password" placeholder="パスワード" required><br>
+  <input type="submit" value="登録"><br>
+  <a href="/register">新規ユーザ作成</a>
+</form>
+{% if errors %}
+  <ul>
+    {% for error in errors %}
+      <li>{{ error }}</li>
+    {% endfor %}
+  </ul>
+{% endif %}
+  
+</body>
+</html>

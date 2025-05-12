@@ -1,0 +1,10 @@
+RewriteEngine On
+RewriteBase /EC-app/Public/
+
+# index.php は除外する
+RewriteCond %{REQUEST_URI} !^/EC-app/Public/index\.php$
+
+# ファイル・ディレクトリが存在しない場合にリダイレクト
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ index.php [QSA,L]
