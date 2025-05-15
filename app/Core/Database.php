@@ -13,9 +13,9 @@ class Database
     {
         if (!self::$instance) {
             try {
-                $dsn = "mysql:host=localhost;dbname=your_db;charset=utf8mb4";
-                $user = "db_user";
-                $pass = "db_pass";
+                $dsn = "mysql:host=localhost;dbname=ec_db;charset=utf8mb4";
+                $user = "ec_user";
+                $pass = "ec_pass";
                 self::$instance = new PDO($dsn, $user, $pass, [
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                 ]);
