@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>カート</title>
+</head>
+<body>
+    <h1>カートの中身</h1>
+
+{% if products %}
+  <ul>
+    {% for product in products %}
+      <li>
+        {{ product.name }} - {{ product.price }}円 x {{ product.quantity }}個
+        <form method="post" action="/cart/remove">
+          <input type="hidden" name="product_id" value="{{ product.id }}">
+          <button type="submit">削除</button>
+        </form>
+      </li>
+    {% endfor %}
+  </ul>
+  <p>
+    合計:
+    {{ products | reduce((sum, p) => sum + (p.price * p.quantity), 0) }}円
+  </p>
+  <a href="/checkout">購入手続きへ</a>
+{% else %}
+  <p>カートは空です。</p>
+{% endif %}
+
+</body>
+</html>
