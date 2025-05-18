@@ -5,6 +5,7 @@ use App\Controllers\UserController;
 use App\Controllers\ProductController;
 use App\Controllers\CartController;
 use App\Controllers\CheckoutController;
+use App\Controllers\MypageController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -16,6 +17,7 @@ $userController = new UserController();
 $productController = new ProductController();
 $cartController = new CartController();
 $checkoutController = new CheckoutController();
+$mypageController = new MypageController();
 
 // --- GETルート ---
 $router->get('/', function () use ($userController) {
@@ -70,6 +72,15 @@ $router->get('/checkout', function () use ($checkoutController) {
 
 $router->post('/checkout', function () use ($checkoutController) {
     $checkoutController->process();
+});
+
+// ---  マイページ機能ルート追加 ---
+$router->get('/mypage', function () use ($mypageController) {
+    $mypageController->index();
+});
+
+$router->get('/mypage/order/{id}', function ($params) use ($mypageController) {
+    $mypageController->detail((int)$params['id']);
 });
 
 // --- ルーティング実行 ---

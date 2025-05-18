@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マイページ</title>
+</head>
+<body>
+    <h2>マイページ - 注文履歴</h2>
+
+    {% if orders %}
+    <ul>
+        {% for order in orders %}
+        <li>
+            注文番号: {{ order.id }} | 合計金額: {{ order.total_price }}円 |
+            日時: {{ order.created_at }}
+            <a href="/mypage/order/{{ order.id }}">詳細</a>
+        </li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>注文履歴はありません。</p>
+    {% endif %}
+    
+</body>
+</html>

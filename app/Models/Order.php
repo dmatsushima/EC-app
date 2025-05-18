@@ -50,4 +50,23 @@ class Order
 
         return $order_id;
     }
+    public function getOrdersByUserId(int $user_id): array
+    {
+        $stmt = $this->pdo->prepare("SELECT * FROM orders WHERE user_id = ? ORDER BY created_at DESC");
+        $stmt->execute([$user_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
+    public function getOrderItems(int $order_id): array
+    {
+        $stmt = $this->pdo->prepare(
+            "SELECT oi.*, p.name 
+            FROM order_items oi
+            JOIN products p ON oi.product_id = p.id
+            WHERE oi.order_id = ?"
+        );
+        $stmt->execute([$order_id]);
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }
