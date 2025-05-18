@@ -4,6 +4,7 @@ use App\Core\Router;
 use App\Controllers\UserController;
 use App\Controllers\ProductController;
 use App\Controllers\CartController;
+use App\Controllers\CheckoutController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -14,6 +15,7 @@ $router = new Router();
 $userController = new UserController();
 $productController = new ProductController();
 $cartController = new CartController();
+$checkoutController = new CheckoutController();
 
 // --- GETルート ---
 $router->get('/', function () use ($userController) {
@@ -59,6 +61,15 @@ $router->post('/cart/add', function () use ($cartController) {
 // カート削除
 $router->post('/cart/remove', function () use ($cartController) {
     $cartController->remove();
+});
+
+// ---  購入機能ルート追加 ---
+$router->get('/checkout', function () use ($checkoutController) {
+    $checkoutController->confirm();
+});
+
+$router->post('/checkout', function () use ($checkoutController) {
+    $checkoutController->process();
 });
 
 // --- ルーティング実行 ---
