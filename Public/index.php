@@ -6,8 +6,10 @@ use App\Controllers\ProductController;
 use App\Controllers\CartController;
 use App\Controllers\CheckoutController;
 use App\Controllers\MypageController;
+use App\Controllers\AdminOrderController;
 
 require_once __DIR__ . '/../vendor/autoload.php';
+require_once __DIR__ . '/../App/helpers.php';
 
 session_start(); // セッションの開始（カート機能に必要）
 
@@ -18,6 +20,7 @@ $productController = new ProductController();
 $cartController = new CartController();
 $checkoutController = new CheckoutController();
 $mypageController = new MypageController();
+$adminOrderController = new AdminOrderController();
 
 // --- GETルート ---
 $router->get('/', function () use ($userController) {
@@ -81,6 +84,15 @@ $router->get('/mypage', function () use ($mypageController) {
 
 $router->get('/mypage/order/{id}', function ($params) use ($mypageController) {
     $mypageController->detail((int)$params['id']);
+});
+
+// ---  管理画面ルート追加 ---
+$router->get('/admin/orders', function () use ($adminOrderController) {
+    $adminOrderController->index();
+});
+
+$router->get('/admin/orders/{id}', function ($params) use ($adminOrderController) {
+    $adminOrderController->detail((int)$params['id']);
 });
 
 // --- ルーティング実行 ---

@@ -69,4 +69,15 @@ class Order
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
+    public function getAllOrders(): array
+    {
+        $stmt = $this->pdo->query(
+            "SELECT o.*, u.name AS user_name 
+            FROM orders o
+            JOIN users u ON o.user_id = u.id
+            ORDER BY o.created_at DESC"
+        );
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
+
 }

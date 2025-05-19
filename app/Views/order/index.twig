@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理画面｜注文一覧</title>
+</head>
+<body>
+    <h2>管理画面 - 注文一覧</h2>
+
+    <ul>
+    {% for order in orders %}
+        <li>
+        注文番号: {{ order.id }} |
+        ユーザー: {{ order.user_name }} |
+        合計: {{ order.total_price }}円 |
+        日時: {{ order.created_at }}
+        <a href="/admin/orders/{{ order.id }}">詳細</a>
+        </li>
+    {% endfor %}
+    </ul>
+
+</body>
+</html>

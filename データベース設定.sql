@@ -46,3 +46,6 @@ CREATE TABLE order_items (
     quantity INT NOT NULL,
     price INT NOT NULL
 );
+
+//usersに管理フラグを追加
+ALTER TABLE users ADD COLUMN is_admin TINYINT(1) DEFAULT 0;

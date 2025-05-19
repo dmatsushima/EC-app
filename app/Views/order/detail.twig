@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>管理画面｜注文詳細</title>
+</head>
+<body>
+    <h2>注文詳細 - 注文番号: {{ order_id }}</h2>
+
+    <ul>
+    {% for item in items %}
+        <li>{{ item.name }} - {{ item.price }}円 × {{ item.quantity }}</li>
+    {% endfor %}
+    </ul>
+
+    <a href="/admin/orders">← 戻る</a>
+</body>
+</html>
